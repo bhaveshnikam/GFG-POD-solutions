@@ -1,0 +1,28 @@
+public static void dfs(int node,boolean vis[],ArrayList<Integer> temp,
+    ArrayList<ArrayList<Integer>> adj){
+        vis[node]=true;
+        for(int i=0;i<adj.get(node).size();i++){
+            if(vis[adj.get(node).get(i)]==false){
+                dfs(adj.get(node).get(i),vis,temp,adj);
+            }
+        }
+        temp.add(node);
+    }
+    static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
+    {
+        // add your code here
+        boolean vis[] = new boolean[V];
+        Arrays.fill(vis,false);
+        ArrayList<Integer> temp = new ArrayList<>();
+        for(int i=0;i<V;i++){
+            if(vis[i]==false){
+                dfs(i,vis,temp,adj);
+            }
+        }
+        Collections.reverse(temp);
+        int ans[] = new int[V];
+        for(int i=0;i<V;i++){
+            ans[i]=temp.get(i);
+        }
+        return ans;
+    }
